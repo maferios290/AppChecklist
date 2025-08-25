@@ -1,16 +1,33 @@
-# alertsapp
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+# AlertsApp
+
+AlertsApp es una aplicación Flutter diseñada para adultos mayores, que permite activar alertas sonoras de emergencia de forma rápida y sencilla. La app presenta múltiples botones de emergencia, cada uno asociado a un sonido diferente, para facilitar la identificación de la situación.
+
+## Características
+
+- Interfaz simple y accesible, pensada para adultos mayores.
+- Varios botones de emergencia, cada uno con un sonido distintivo.
+- Ideal para situaciones de emergencia en el hogar o residencias.
+
+## Uso
+
+1. Abre la aplicación en tu dispositivo móvil.
+2. Pulsa el botón de emergencia correspondiente a la situación.
+3. El dispositivo emitirá un sonido fuerte y claro para alertar a quienes estén cerca.
+
+## Requisitos
+
+- Flutter 3.9.0 o superior
+- Compatible con Android e iOS
+
+## Instalación y ejecución
+
+```sh
+flutter pub get
+flutter run
+```
+
+## Créditos
+
+Desarrollado por afmirandad.
