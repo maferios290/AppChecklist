@@ -61,6 +61,7 @@ flutter:
 
   assets:
     - assets/audio/ # Asegúrate de crear esta carpeta y agregar los archivos mp3 necesarios
+    - assets/audio/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

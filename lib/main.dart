@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -9,91 +8,97 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: '🎵 Music Player App',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        primarySwatch: Colors.deepPurple,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MusicHomePage(),
     );
   }
 }
 
-
-
-class MyHomePage extends StatefulWidget {
-  final String title;
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class MusicHomePage extends StatefulWidget {
+  const MusicHomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MusicHomePage> createState() => _MusicHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MusicHomePageState extends State<MusicHomePage> {
   final AudioPlayer _audioPlayer = AudioPlayer();
 
-  // Lista de sonidos de emergencia (debes agregar los archivos en assets/audio/)
-  final List<Map<String, String>> emergencySounds = [
-    {'label': 'Alerta General', 'file': 'alerta_general.mp3'},
-    {'label': 'Emergencia Médica', 'file': 'emergencia_medica.mp3'},
-    {'label': 'Incendio', 'file': 'incendio.mp3'},
-    {'label': 'Caída', 'file': 'caida.mp3'},
+  // Lista de canciones con íconos estilo reproductor
+  final List<Map<String, dynamic>> musicTracks = [
+    {'label': '🎸 Aca entre nos', 'file': 'acaentrenos.mp3', 'icon': Icons.queue_music},
+    {'label': '🎶 La derrota', 'file': 'laderrota.mp3', 'icon': Icons.album},
+    {'label': '🎧 Que de raro tiene', 'file': 'quederarotiene.mp3', 'icon': Icons.headphones},
+    {'label': '🥁 Lástima que seas ajena', 'file': 'lastimaqueseasajena.mp3', 'icon': Icons.library_music},
   ];
 
-  void _playSound(String fileName) async {
-    await _audioPlayer.stop();
-    await _audioPlayer.play(AssetSource('audio/$fileName'));
+  Future<void> playMusic(String file) async {
+    await _audioPlayer.stop(); // Detiene si hay otra canción sonando
+    await _audioPlayer.play(AssetSource(file));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Alertas Sonoras'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Presiona un botón de emergencia:',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 32),
-            ...emergencySounds.map((sound) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "🎵 Music Player 🎶",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 8,
+                      color: Colors.black,
+                      offset: Offset(2, 2),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 30),
+
+              // Botones de música
+              ...musicTracks.map((track) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(250, 60),
-                      textStyle: const TextStyle(fontSize: 20),
-                      backgroundColor: Colors.redAccent,
+                      backgroundColor: Colors.deepPurple.withOpacity(0.8),
+                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      elevation: 8,
                     ),
-                    icon: const Icon(Icons.warning, size: 32),
-                    label: Text(sound['label']!),
-                    onPressed: () => _playSound(sound['file']!),
+                    onPressed: () => playMusic("assets/audio/${track['file']}"),
+                    icon: Icon(track['icon'], size: 36, color: Colors.yellowAccent),
+                    label: Text(
+                      track['label'],
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
+                    ),
                   ),
-                )),
-          ],
+                );
+              }).toList(),
+            ],
+          ),
         ),
       ),
     );
