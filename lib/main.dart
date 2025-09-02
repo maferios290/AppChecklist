@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,93 +11,144 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: '🎵 Music Player App',
+      title: 'Checklist App',
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.orange,
       ),
-      home: const MusicHomePage(),
+      home: const ChecklistHomePage(),
     );
   }
 }
 
-class MusicHomePage extends StatefulWidget {
-  const MusicHomePage({super.key});
-
-  @override
-  State<MusicHomePage> createState() => _MusicHomePageState();
-}
-
-class _MusicHomePageState extends State<MusicHomePage> {
-  final AudioPlayer _audioPlayer = AudioPlayer();
-
-  // Lista de canciones con íconos estilo reproductor
-  final List<Map<String, dynamic>> musicTracks = [
-    {'label': '🎸 Aca entre nos', 'file': 'acaentrenos.mp3', 'icon': Icons.queue_music},
-    {'label': '🎶 La derrota', 'file': 'laderrota.mp3', 'icon': Icons.album},
-    {'label': '🎧 Que de raro tiene', 'file': 'quederarotiene.mp3', 'icon': Icons.headphones},
-    {'label': '🥁 Lástima que seas ajena', 'file': 'lastimaqueseasajena.mp3', 'icon': Icons.library_music},
-  ];
-
-  Future<void> playMusic(String file) async {
-    await _audioPlayer.stop(); // Detiene si hay otra canción sonando
-    await _audioPlayer.play(AssetSource(file));
-  }
+class ChecklistHomePage extends StatelessWidget {
+  const ChecklistHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "🎵 Music Player 🎶",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 8,
-                      color: Colors.black,
-                      offset: Offset(2, 2),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 30),
-
-              // Botones de música
-              ...musicTracks.map((track) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple.withOpacity(0.8),
-                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      elevation: 8,
-                    ),
-                    onPressed: () => playMusic("assets/audio/${track['file']}"),
-                    icon: Icon(track['icon'], size: 36, color: Colors.yellowAccent),
-                    label: Text(
-                      track['label'],
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Encabezado
+            Container(
+              width: double.infinity,
+              color: Colors.orange,
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                children: [
+                  const Text(
+                    "CHECKLIST",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
-                );
-              }).toList(),
-            ],
-          ),
+                  const SizedBox(height: 10),
+                  Image.asset(
+                    "assets/images/logo.png",
+                    height: 100,
+                  ),
+                ],
+              ),
+            ),
+
+            // Botones de navegación
+            Container(
+              color: Colors.orangeAccent,
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: const Text("Registro Asistencia"),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: const Text("Administrador"),
+                  ),
+                ],
+              ),
+            ),
+
+            // Banner de promoción (imagen1)
+            Container(
+              margin: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                color: Colors.orange.shade50,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                children: [
+                  Image.asset("assets/images/imagen1.png"),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Si eres estudiante o empleado activo, obtén \$150.000 por cada referido...",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16, color: Colors.black87),
+                  ),
+                ],
+              ),
+            ),
+
+            // Texto universidad
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Text(
+                "Universidad San Buenaventura",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.orange,
+                ),
+              ),
+            ),
+
+            // Fotos del campus (imagen2 y imagen3)
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        "assets/images/imagen2.png",
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        "assets/images/imagen3.png",
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
