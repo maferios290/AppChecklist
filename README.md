@@ -1,6 +1,6 @@
 samples, guidance on mobile development, and a full API reference.
 
-# AlertsApp
+# AppChecklist
 
 AlertsApp es una aplicación Flutter diseñada para adultos mayores, que permite activar alertas sonoras de emergencia de forma rápida y sencilla. La app presenta múltiples botones de emergencia, cada uno asociado a un sonido diferente, para facilitar la identificación de la situación.
 
