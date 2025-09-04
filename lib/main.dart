@@ -47,7 +47,7 @@ class ChecklistHomePage extends StatelessWidget {
                   const SizedBox(height: 10),
                   Image.asset(
                     "assets/images/logo.png",
-                    height: 100,
+                    height: 110,
                   ),
                 ],
               ),
