@@ -99,7 +99,7 @@ class ChecklistHomePage extends StatelessWidget {
                   const Text(
                     "Si eres estudiante o empleado activo, obtén \$150.000 por cada referido...",
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15, color: Colors.black87),
+                    style: TextStyle(fontSize: 16, color: Colors.black87),
                   ),
                 ],
               ),
