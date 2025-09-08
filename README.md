@@ -34,8 +34,14 @@ El diseño está inspirado en la Universidad San Buenaventura y combina imágene
 - Login
 - Registrar asistencia
 
-## E
+## Ejecución
+1. git clone https://github.com/usuario/ChecklistApp.git
+2. cd ChecklistApp
+3. flutter pub get
+4. flutter run
 
-## Créditos
+## Importante
 
-Desarrollado por afmirandad.
+- Actualmente, la aplicación funciona como prototipo visual.
+- Los formularios (login y registro de asistencia) todavía no tienen conexión con una base de datos.
+- El diseño es escalable, lo que facilita agregar nuevas pantallas y funcionalidades en futuras versiones.
